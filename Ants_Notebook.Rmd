@@ -1,11 +1,16 @@
 ---
-title: "R Notebook"
+title: "Co-existence of ants in the Cederberg Region"
 output:
   html_document:
     df_print: paged
     
-    
-    
+ 
+library(tidyverse)
+library(readxl)  
+library(GGally)
+
+edat <- read_xlsx("data/Ant data Oct 2002_fixed.xlsx", sheet = "Sheet1")   
+
 ---
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
