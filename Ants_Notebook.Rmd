@@ -1,20 +1,63 @@
 ---
+---
+---
+
+------------------------------------------------------------------------
+       
 title: "Co-existence of ants in the Cederberg Region"
-output: html_document
-  html_document:
-    df_print: paged
-    
-```{r, echo=TRUE, fig.width = 12, fig.height = 8} 
-#loading necessary libraries
+output: html_document 
+html_document: 
+ df_print: paged
+ includes: 
+  in_header: "" 
+  before_body: ""
+---
+
+# Co-existence of ants in the Cederberg Region
+
+\
+This project investigates the coexistence of ant species in the Cederberg region. By examining the abundance and distribution of various ant species across various sites within the region, we aim to understand the ecological factors that influence species interactions and their ability to coexist. The findings provide valuable insights into the dynamics of ant communities in a diverse environment, contributing to broader ecological understanding and conservation efforts in the Cederberg mountains.\
+\
+
+![](ANTS.png)
+
+```{r load_pckgs, include=FALSE, results='hide'}
+
 library(tidyverse)
 library(readxl) 
 library(ggplot2)
+library(DT)
 library(GGally)
 library(dplyr)
 
 #reading data from Excel file
 edat <- read_xlsx("data/Ant data Oct 2002_fixed.xlsx", sheet = "Sheet1")   
+```
 
+The data were collected in a field study in 2002. Pitfall traps were left in the field for one week, and after this time the ants sampled were counted and identified. In total, there were 680 pitfall traps, and 24 species of ants were recorded.\
+\
+\
+
+Here's a table with the data collected:\
+*(There's way too much to take in, and it's hard to visualize how the community composition varies from site to site. So this is here for your interest, but feel free to skip on over to the figures that summarize it all)*\
+\
+\
+\
+
+```{r fancy_tabe, echo=FALSE, results='show',fig.width = 12, fig.height = 8}
+datatable(edat, caption = "Interactive Table of Raw Data")
+```
+\
+\
+\
+\
+
+It's *much* easier to understand the data with the help of graphs:\
+
+\
+\
+
+```{r pretty_pictures, echo=FALSE, fig.width = 12, fig.height = 8, error=FALSE, warning=FALSE}
 #Remove point and repetition numbers from site
  sdat <- edat %>% separate(Site, ".")
 names(sdat)[names(sdat) == "."] <- "Site"
@@ -29,9 +72,9 @@ for(site in unique_sites) {
   # Create the bar plot for the current site
   p <- ggplot(site_data, aes(x = Species, y = Abundance, fill = Species)) +
     geom_bar(stat = "identity") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 0.5, size = 5)) +  # Rotate species labels
-    labs(title = paste("Species Abundance at", site), x = "Species", y = "Abundance") +
-    theme_minimal()
+    theme(axis.text.x = element_text(angle = -45, hjust = 0, size = 10, margin = margin(t = 5)), legend.position="none") +  
+    labs(title = paste("Species Abundance at site", site), x = "Species", y = "Abundance") 
+
   
   # Print the plot
   print(p)
@@ -39,5 +82,10 @@ for(site in unique_sites) {
 
 ```
 
-
-
+\
+\
+\
+If you're curious about this project, contact the [Soil Ecology and Entomology Research Group](https://seer.org.za/).\
+Dr. Charlene Janion-Scheepers and Abusisiwe Ndaba (University of Cape Town) granted me access to this data for this project.\
+\
+![](ANTS.png)

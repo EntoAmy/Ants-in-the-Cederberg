@@ -1,2 +1,6 @@
 install.packages("rmarkdown")
 install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("DT")
+install.packages("GGally")
+install.packages("dplyr")
